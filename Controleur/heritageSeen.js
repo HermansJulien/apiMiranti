@@ -23,7 +23,7 @@ const heritageDb = require('../Model/heritage');
  *              localization:
  *                  type: string
  *              creationDate:
- *                  type: object
+ *                  type: string
  *              frenchDesc:
  *                  type: string
  *              englishDesc:
@@ -47,20 +47,20 @@ const heritageDb = require('../Model/heritage');
  *                  schema:
  *                      $ref: '#/components/schemas/HeritageSeen'
  */
-module.exports.getHeritagesSeen = async (req, res) =>{
+module.exports.getHeritagesSeen = async (req, res) => {
     const client = await pool.connect();
     const mailAddress = req.query.mailAddress;
-    if((mailAddress === undefined || mailAddress ==="")){
-        res.status(400).send({error:"You forget to selection your email"});
+    if ((mailAddress === undefined || mailAddress === "")) {
+        res.status(400).send({ error: "You forget to selection your email" });
     }
-    try{
-        const {rows : heritagesSeens} = await heritageSeenDb.getHeritagesSeen(client, mailAddress,req.query.heritage, req.query.locality, req.query.country, req.query.kind);
+    try {
+        const { rows: heritagesSeens } = await heritageSeenDb.getHeritagesSeen(client, mailAddress, req.query.heritage, req.query.locality, req.query.country, req.query.kind);
         const heritageSeen = heritagesSeens[0];
-        if(heritageSeen !== undefined){
+        if (heritageSeen !== undefined) {
             let indiceConversion = 0;
 
             let tab = [];
-            while(indiceConversion < heritagesSeens.length){
+            while (indiceConversion < heritagesSeens.length) {
                 let objet = {};
                 objet.technicalId = heritagesSeens[indiceConversion].technicalid;
                 objet.countryName = heritagesSeens[indiceConversion].countryname;
@@ -79,14 +79,14 @@ module.exports.getHeritagesSeen = async (req, res) =>{
             }
             console.log(tab);
             res.json(tab);
-        }else{
+        } else {
             console.log(req.query.heritage);
-            res.status(404).json({error : "No heritages found"});
+            res.status(404).json({ error: "No heritages found" });
         }
-    }catch(e){
+    } catch (e) {
         console.log(e);
-        res.status(500).json({error : "Something goes wrong on the server"});
-    }finally {
+        res.status(500).json({ error: "Something goes wrong on the server" });
+    } finally {
         client.release();
     }
 
@@ -113,42 +113,43 @@ module.exports.getHeritagesSeen = async (req, res) =>{
  *                      required:
  *                          - heritageId
  *                          - mailAddress
+ *                          - isLiked
  */
 
-module.exports.addHeritageSeen = async (req,res)=>{
-    const{mailAddress,idHeritage,isLiked} =req.body;
+module.exports.addHeritageSeen = async (req, res) => {
+    const { mailAddress, idHeritage, isLiked } = req.body;
 
-    if((mailAddress === undefined || mailAddress==="") || (idHeritage === undefined ||idHeritage==="")){
-        res.status(400).json({error:"You forget some important input"});
+    if ((mailAddress === undefined || mailAddress === "") || (idHeritage === undefined || idHeritage === "") || (isLiked === undefined || isLiked === "")) {
+        res.status(400).json({ error: "You forget some important input" });
 
-    }else{
+    } else {
         const client = await pool.connect();
-        try{
-            const {rows : clientExists} = await clientDb.getClients(client, mailAddress);
+        try {
+            const { rows: clientExists } = await clientDb.getClients(client, mailAddress);
             const clientDbFind = clientExists[0];
-            if(clientDbFind === undefined){
-                res.status(401).json({error:"Unknown email"});
-            }else{
-                const {rows : heritageExists} = await heritageDb.heritageExist(client, idHeritage);
+            if (clientDbFind === undefined) {
+                res.status(401).json({ error: "Unknown email" });
+            } else {
+                const { rows: heritageExists } = await heritageDb.heritageExist(client, idHeritage);
                 const heritageDbExist = heritageExists[0];
-                if(heritageDbExist === undefined){
-                    res.status(401).json({error:"Unknown heritage"});
-                }else{
-                    const {rows : heritageSeenExist} = await heritageSeenDb.heritageSeenExist(client,mailAddress,idHeritage);
+                if (heritageDbExist === undefined) {
+                    res.status(401).json({ error: "Unknown heritage" });
+                } else {
+                    const { rows: heritageSeenExist } = await heritageSeenDb.heritageSeenExist(client, mailAddress, idHeritage);
                     const heritageSeenExistDb = heritageSeenExist[0];
-                    if(heritageSeenExistDb!== undefined){
-                        res.status(401).json({error:"You already seen this heritage"});
-                    }else{
-                        await heritageSeenDb.addHeritageSeen(client,mailAddress,idHeritage,isLiked);
+                    if (heritageSeenExistDb !== undefined) {
+                        res.status(401).json({ error: "You already seen this heritage" });
+                    } else {
+                        await heritageSeenDb.addHeritageSeen(client, mailAddress, idHeritage, isLiked);
                         res.sendStatus(201);
                     }
                 }
             }
 
-        }catch (e){
+        } catch (e) {
             console.log(e);
-            res.status(500).json({error:"Error : Something goes wrong on the server"});
-        }finally {
+            res.status(500).json({ error: "Error : Something goes wrong on the server" });
+        } finally {
             client.release();
         }
     }
@@ -160,19 +161,19 @@ module.exports.addHeritageSeen = async (req,res)=>{
  *      HeritageDeletedSeen:
  *          description: We have deleted this heritage
  */
-module.exports.deleteHeritageSeen = async (req,res) =>{
-    const{mailAddress,heritageId} = req.query;
-    if((heritageId === undefined ||heritageId === "") || (mailAddress === undefined ||mailAddress === "")){
-        res.status(400).json({error:"You forget to mention important input"});
-    }else{
+module.exports.deleteHeritageSeen = async (req, res) => {
+    const { mailAddress, heritageId } = req.query;
+    if ((heritageId === undefined || heritageId === "") || (mailAddress === undefined || mailAddress === "")) {
+        res.status(400).json({ error: "You forget to mention important input" });
+    } else {
         const client = await pool.connect();
-        try{
-            await heritageSeenDb.deleteHeritageSeen(client,heritageId, req.query.mailAddress);
+        try {
+            await heritageSeenDb.deleteHeritageSeen(client, heritageId, req.query.mailAddress);
             res.sendStatus(204);
-        }catch(e){
+        } catch (e) {
             console.log(e);
-            res.status(500).json({error:"Error : Something goes wrong on the server"});
-        }finally {
+            res.status(500).json({ error: "Error : Something goes wrong on the server" });
+        } finally {
             client.release();
         }
     }
@@ -184,39 +185,39 @@ module.exports.deleteHeritageSeen = async (req,res) =>{
  *      HeritageUpdatedSeen:
  *          description: We have updated this heritage
  */
-module.exports.updateHeritageSeen = async(req,res) =>{
-    const{mailAddress,idHeritage,isLiked} =req.body;
-    if((mailAddress === undefined  || mailAddress === "") || (idHeritage === undefined ||idHeritage === "") ||(isLiked === undefined || isLiked ==="")){
-        res.status(400).json({error:"You forget some important input"});
-    }else{
+module.exports.updateHeritageSeen = async (req, res) => {
+    const { mailAddress, idHeritage, isLiked } = req.body;
+    if ((mailAddress === undefined || mailAddress === "") || (idHeritage === undefined || idHeritage === "") || (isLiked === undefined || isLiked === "")) {
+        res.status(400).json({ error: "You forget some important input" });
+    } else {
         const client = await pool.connect();
-        try{
-            const {rows : clientExists} = await clientDb.getClients(client, mailAddress);
+        try {
+            const { rows: clientExists } = await clientDb.getClients(client, mailAddress);
             const clientDbFind = clientExists[0];
-            if(clientDbFind === undefined){
-                res.status(401).json({error:"Unknown email"});
-            }else{
-                const {rows : heritageExists} = await heritageDb.heritageExist(client, idHeritage);
+            if (clientDbFind === undefined) {
+                res.status(401).json({ error: "Unknown email" });
+            } else {
+                const { rows: heritageExists } = await heritageDb.heritageExist(client, idHeritage);
                 const heritageDbExist = heritageExists[0];
-                if(heritageDbExist === undefined){
-                    res.status(401).json({error:"Unknown heritage"});
-                }else{
-                    const {rows : heritageSeenExist} = await heritageSeenDb.heritageSeenExist(client,mailAddress,idHeritage);
+                if (heritageDbExist === undefined) {
+                    res.status(401).json({ error: "Unknown heritage" });
+                } else {
+                    const { rows: heritageSeenExist } = await heritageSeenDb.heritageSeenExist(client, mailAddress, idHeritage);
                     const heritageSeenExistDb = heritageSeenExist[0];
-                    if(heritageSeenExistDb!== undefined){
-                        await heritageSeenDb.updateHeritageSeen(client,mailAddress,idHeritage,isLiked);
+                    if (heritageSeenExistDb !== undefined) {
+                        await heritageSeenDb.updateHeritageSeen(client, mailAddress, idHeritage, isLiked);
                         res.sendStatus(204);
 
-                    }else{
-                        res.status(401).json({error:"You must have seen that heritage"});
+                    } else {
+                        res.status(401).json({ error: "You must have seen that heritage" });
                     }
                 }
             }
 
-        }catch (e){
+        } catch (e) {
             console.log(e);
-            res.status(500).json({error:"Error : Something goes wrong on the server"});
-        }finally {
+            res.status(500).json({ error: "Error : Something goes wrong on the server" });
+        } finally {
             client.release();
         }
     }
