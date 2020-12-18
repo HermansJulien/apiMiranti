@@ -2,52 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7eaced08-ff3f-4590-b02f-6a8b871cd520" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Controleur/client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Controleur/heritage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Controleur/heritageSeen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Controleur/localityByCountries.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Controleur/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/authUser.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/database.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/heritage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/heritageSeen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/imageManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/localityByCountries.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Model/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/Vagrantfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/heritage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/heritageSeen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/localitiesByCountry.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/api/v1/routes/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/middelware/Authorization.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/middelware/IdentificationJWT.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/scripts/JS/initDB.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/scripts/SQL/scriptSQl.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/ubuntu-bionic-18.04-cloudimg-console.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/0b197c23-5583-43cc-a19f-c6265cddd445.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/0d364cf4-dc22-432b-8416-bdc016c34c32.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/15a42f84-9eb5-49a0-b422-cea5c8adf84f.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/23b80cdd-a690-4d6b-9e82-59dd26c07f6d.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/292eb0e7-d866-42d0-b319-13bab89f7dd8.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/356ad825-ec0d-43e0-958b-818feabeec21.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/55c0e6e4-f2ba-4478-9537-e90372b8be0b.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/7621a7f1-374b-4c79-b8fc-078af4342a5a.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/766086ce-65d9-4130-a9aa-e7fec3d56862.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/860572f0-608c-4f81-8596-ce3b29d09b49.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/971ddf4d-f3ba-4b7e-88aa-7dfa769935c4.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/98dbdfb1-e46c-4299-b87c-91980ba98f59.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/9a62b608-5e9b-45b6-8ba5-ed0aa790c607.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/9b7fe3da-d237-40d5-9965-f91ea2f46e9a.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/c956750e-38f3-4ba0-afb1-f0e376877da2.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/upload/img/eaad3f09-24f2-4d7f-831f-88f2143a42a1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smartCityAPI/utils/utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,10 +32,17 @@
       <option name="presentableId" value="Default" />
       <updated>1608233744710</updated>
       <workItem from="1608233745785" duration="143000" />
+      <workItem from="1608277419688" duration="2670000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608277444417">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1608277444417" />
   </component>
 </project>

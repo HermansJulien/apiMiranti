@@ -6,11 +6,12 @@ const JWTMiddleware = require("../../../middelware/IdentificationJWT");
 const AuthoMiddleware = require("../../../middelware/Authorization");
 const storage = multer.memoryStorage();
 const upload = multer({
-    limits:{
-        fileSize:700000
+    limits: {
+        fileSize: 700000
     },
-    storage:storage
-})
+    storage: storage
+});
+
 /**
  * @swagger
  * /heritage/:
@@ -33,20 +34,32 @@ const upload = multer({
  *          500:
  *              description: Server Error
  */
-router.patch('/',JWTMiddleware.identification,AuthoMiddleware.mustBeAdmin,upload.fields([
-    {name:'heritageName', maxCount:1},
-    {name:'countryName',maxCount: 1},
-    {name:'kindOfHeritage',maxCount: 1},
-    {name:'author', maxCount:1},
-    {name:'localization',maxCount: 1},
-    {name:'creationDate',maxCount: 1},
-    {name:'frenchDesc', maxCount:1},
-    {name:'englishDesc',maxCount: 1},
-    {name:'idLocality',maxCount: 1},
-    {name:'picture',maxCount: 1},
-    {name:'oldPicture',maxCount: 1},
-    {name:'heritageId',maxCount: 1}
-]),heritageController.updateHeritage);
+const updateForm = upload.fields([
+    { name: 'heritageName', maxCount: 1 },
+    { name: 'countryName', maxCount: 1 },
+    { name: 'kindOfHeritage', maxCount: 1 },
+    { name: 'author', maxCount: 1 },
+    { name: 'localization', maxCount: 1 },
+    { name: 'creationDate', maxCount: 1 },
+    { name: 'frenchDesc', maxCount: 1 },
+    { name: 'englishDesc', maxCount: 1 },
+    { name: 'idLocality', maxCount: 1 },
+    { name: 'picture', maxCount: 1 },
+    { name: 'oldPicture', maxCount: 1 },
+    { name: 'heritageId', maxCount: 1 }
+]);
+router.patch('/', JWTMiddleware.identification, AuthoMiddleware.mustBeAdmin, (req, res, next) => {
+    updateForm(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            res.status(400).json({ error: "Your picture is too large" });
+        } else if (err) {
+            res.status(500).json({ error: "Something goes wrong" });
+        } else {
+            next();
+        }
+
+    })
+}, heritageController.updateHeritage);
 /**
  * @swagger
  * /heritage/:
@@ -84,7 +97,7 @@ router.patch('/',JWTMiddleware.identification,AuthoMiddleware.mustBeAdmin,upload
  *          500:
  *              description: Server Error
  */
-router.get('/',JWTMiddleware.identification,heritageController.getHeritages);
+router.get('/', JWTMiddleware.identification, heritageController.getHeritages);
 /**
  * @swagger
  * /heritage/:
@@ -110,7 +123,7 @@ router.get('/',JWTMiddleware.identification,heritageController.getHeritages);
  *          500:
  *              description: Server Error
  */
-router.delete('/',JWTMiddleware.identification,AuthoMiddleware.mustBeAdmin,heritageController.deleteHeritage);
+router.delete('/', JWTMiddleware.identification, AuthoMiddleware.mustBeAdmin, heritageController.deleteHeritage);
 
 
 /**
@@ -135,17 +148,28 @@ router.delete('/',JWTMiddleware.identification,AuthoMiddleware.mustBeAdmin,herit
  *          500:
  *              description: Server Error
  */
-router.post('/', JWTMiddleware.identification,AuthoMiddleware.mustBeAdmin,upload.fields([
-    {name:'heritageName', maxCount:1},
-    {name:'countryName',maxCount: 1},
-    {name:'kindOfHeritage',maxCount: 1},
-    {name:'author', maxCount:1},
-    {name:'localization',maxCount: 1},
-    {name:'creationDate',maxCount: 1},
-    {name:'frenchDesc', maxCount:1},
-    {name:'englishDesc',maxCount: 1},
-    {name:'idLocality',maxCount: 1},
-    {name:'picture',maxCount: 1},
 
-]),heritageController.addHeritage);
+const sendForm = upload.fields([
+    { name: 'heritageName', maxCount: 1 },
+    { name: 'countryName', maxCount: 1 },
+    { name: 'kindOfHeritage', maxCount: 1 },
+    { name: 'author', maxCount: 1 },
+    { name: 'localization', maxCount: 1 },
+    { name: 'creationDate', maxCount: 1 },
+    { name: 'frenchDesc', maxCount: 1 },
+    { name: 'englishDesc', maxCount: 1 },
+    { name: 'idLocality', maxCount: 1 },
+    { name: 'picture', maxCount: 1 },
+]);
+router.post('/', JWTMiddleware.identification, AuthoMiddleware.mustBeAdmin, (req, res, next) => {
+    sendForm(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+            res.status(400).json({ error: "Your picture is too large" });
+        } else if (err) {
+            res.status(500).json({ error: "Something goes wrong" });
+        } else {
+            next();
+        }
+    })
+}, heritageController.addHeritage);
 module.exports = router;
