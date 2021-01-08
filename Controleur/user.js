@@ -119,7 +119,7 @@ module.exports.login = async (req, res) => {
                 const token = jwt.sign(
                     payload,
                     process.env.SECRET_TOKEN,
-                    { expiresIn: '1m' }
+                    { expiresIn: '12h' }
                 );
                 res.json(token);
 
